@@ -1,69 +1,688 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Página en Construcción | CASTDIM</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Landa · Sotavento Residencial | CASTDIM</title>
+<meta name="description" content="Modelo Landa en Sotavento Residencial, San Luis Potosí. 203.78 m² de construcción, 3 recámaras, jardín privado. Desde $3,250,000.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-    padding: 32px;
+  :root{
+    --gold:#fecb47;
+    --landa:#b6935f;
+    --landa-dark:#8f7147;
+    --blush:#f3ece4;
+    --charcoal:#221f1c;
+    --gray-1:#6b655d;
+    --gray-2:#a39c92;
+    --gray-3:#e6e0d6;
+    --cream:#faf7f2;
+    --white:#ffffff;
+    --shadow: 0 20px 50px rgba(34,31,28,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Montserrat',sans-serif;
+    color:var(--charcoal);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    margin:0;
+    line-height:1.1;
+  }
+  p{margin:0;}
+  img{max-width:100%;display:block;}
+  a{text-decoration:none;color:inherit;}
+  .container{max-width:1200px;margin:0 auto;padding:0 20px;}
+  .eyebrow{
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--landa-dark);
   }
 
-  .container {
-    text-align: center;
-    max-width: 480px;
+  /* ---------- reveal ---------- */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- navbar ---------- */
+  .navbar{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 20px;
+    background:rgba(250,247,242,0.0);
+    transition:background .35s ease, box-shadow .35s ease, padding .35s ease;
+  }
+  .navbar.scrolled{
+    background:rgba(250,247,242,0.92);
+    backdrop-filter:blur(10px);
+    box-shadow:0 4px 24px rgba(34,31,28,0.08);
+    padding:10px 20px;
+  }
+  .nav-logo img{height:26px; width:auto;}
+  .nav-cta{
+    background:var(--charcoal);
+    color:var(--white);
+    font-size:.72rem;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:11px 18px;
+    border-radius:30px;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .nav-cta:active{transform:scale(.95);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    height:100svh;
+    min-height:560px;
+    display:flex;
+    align-items:flex-end;
+    overflow:hidden;
+  }
+  .hero-img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover;
+    transform:scale(1.06);
+  }
+  .hero-scrim{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(34,31,28,.35) 0%, rgba(34,31,28,.05) 30%, rgba(34,31,28,.15) 55%, rgba(34,31,28,.86) 100%);
+  }
+  .hero-content{
+    position:relative; z-index:2;
+    padding:0 20px 40px;
+    width:100%;
+    color:var(--white);
+  }
+  .hero-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:.68rem; letter-spacing:.2em; text-transform:uppercase;
+    font-weight:700; color:var(--gold);
+    margin-bottom:14px;
+  }
+  .hero-tag::before{content:''; width:22px; height:1px; background:var(--gold);}
+  .hero h1{
+    font-size:clamp(3rem, 16vw, 5.5rem);
+    letter-spacing:-.01em;
+    margin-bottom:6px;
+  }
+  .hero-sub{
+    font-size:1rem;
+    color:rgba(255,255,255,.85);
+    margin-bottom:22px;
+    font-weight:400;
+  }
+  .hero-price-row{
+    display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+    flex-wrap:wrap;
+    padding-top:18px;
+    border-top:1px solid rgba(255,255,255,.25);
+  }
+  .hero-price-label{font-size:.66rem; letter-spacing:.15em; text-transform:uppercase; color:rgba(255,255,255,.65); margin-bottom:4px;}
+  .hero-price{font-family:'Fraunces',serif; font-size:1.7rem; font-weight:500;}
+  .btn-primary{
+    background:var(--landa);
+    color:var(--white);
+    font-size:.78rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+    padding:15px 26px;
+    border-radius:40px;
+    display:inline-flex; align-items:center; gap:10px;
+    box-shadow:0 8px 24px rgba(182,147,95,.4);
+    transition:transform .2s ease, box-shadow .2s ease;
+    white-space:nowrap;
+  }
+  .btn-primary:active{transform:scale(.96);}
+  .scroll-cue{
+    position:absolute; bottom:18px; left:50%; transform:translateX(-50%);
+    z-index:2; color:rgba(255,255,255,.7);
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+    animation:bob 2.2s ease-in-out infinite;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,6px);}}
+
+  /* ---------- facts strip ---------- */
+  .facts{
+    background:var(--charcoal);
+    color:var(--white);
+    padding:26px 0;
+  }
+  .facts-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px 10px;
+  }
+  .fact-item{text-align:center; padding:6px;}
+  .fact-num{font-family:'Fraunces',serif; font-size:1.6rem; color:var(--gold); font-weight:500;}
+  .fact-label{font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.6); margin-top:4px;}
+
+  /* ---------- section common ---------- */
+  section{padding:64px 0;}
+  .section-head{margin-bottom:32px;}
+  .section-head h2{font-size:clamp(1.8rem,7vw,2.6rem); margin-top:8px;}
+  .section-head p{color:var(--gray-1); margin-top:14px; line-height:1.7; max-width:60ch; font-size:.95rem;}
+
+  /* ---------- intro / description ---------- */
+  .intro{background:var(--cream);}
+  .intro-quote{
+    font-family:'Fraunces',serif;
+    font-size:clamp(1.3rem,5vw,1.7rem);
+    font-style:italic;
+    font-weight:400;
+    line-height:1.4;
+    color:var(--charcoal);
+    border-left:3px solid var(--landa);
+    padding-left:18px;
+    margin-top:24px;
   }
 
-  .logo {
-    width: 100%;
-    max-width: 340px;
-    height: auto;
-    margin-bottom: 40px;
+  /* ---------- gallery ---------- */
+  .gallery{background:var(--white);}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .gallery-grid img{
+    width:100%; height:100%;
+    object-fit:cover;
+    aspect-ratio:1/1;
+    border-radius:6px;
+    cursor:pointer;
+    transition:opacity .3s ease;
+  }
+  .gallery-grid img:active{opacity:.75;}
+  .gallery-grid .wide{grid-column:span 2; aspect-ratio:16/10;}
+  .gallery-grid .tall{aspect-ratio:3/4.4;}
+
+  /* lightbox */
+  .lightbox{
+    position:fixed; inset:0; z-index:1000;
+    background:rgba(20,18,16,.96);
+    display:none; align-items:center; justify-content:center;
+    padding:20px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-height:82vh; max-width:100%; border-radius:4px; object-fit:contain;}
+  .lightbox-close, .lightbox-nav{
+    position:absolute; color:var(--white); background:rgba(255,255,255,.12);
+    border:none; width:42px; height:42px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; cursor:pointer;
+  }
+  .lightbox-close{top:20px; right:20px;}
+  .lightbox-nav.prev{left:12px; top:50%; transform:translateY(-50%);}
+  .lightbox-nav.next{right:12px; top:50%; transform:translateY(-50%);}
+  .lightbox-count{position:absolute; bottom:22px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.6); font-size:.75rem; letter-spacing:.1em;}
+
+  /* ---------- floor plans ---------- */
+  .plans{background:var(--blush);}
+  .plan-tabs{
+    display:flex; gap:8px; margin-bottom:22px;
+    background:var(--white); padding:5px; border-radius:40px;
+    max-width:340px;
+  }
+  .plan-tab{
+    flex:1; text-align:center; padding:11px 10px;
+    font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    border-radius:30px; cursor:pointer; color:var(--gray-1);
+    transition:background .25s ease, color .25s ease;
+  }
+  .plan-tab.active{background:var(--charcoal); color:var(--white);}
+  .plan-panel{display:none;}
+  .plan-panel.active{display:block;}
+  .plan-card{
+    background:var(--white); border-radius:10px; padding:14px;
+    box-shadow:var(--shadow);
+  }
+  .plan-card img{border-radius:6px;}
+  .plan-list{
+    margin-top:20px;
+    display:grid; gap:10px;
+  }
+  .plan-list-item{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:.86rem; color:var(--charcoal);
+    padding-bottom:10px; border-bottom:1px solid var(--gray-3);
+  }
+  .plan-list-item .dot{width:6px; height:6px; border-radius:50%; background:var(--landa); margin-top:7px; flex-shrink:0;}
+
+  /* ---------- specs / acabados ---------- */
+  .specs{background:var(--white);}
+  .spec-group{margin-bottom:28px;}
+  .spec-group h3{
+    font-size:1.05rem; margin-bottom:14px; color:var(--landa-dark);
+    display:flex; align-items:center; gap:10px;
+  }
+  .spec-group h3::before{content:''; width:26px; height:1px; background:var(--landa);}
+  .spec-group ul{list-style:none; margin:0; padding:0; display:grid; gap:10px;}
+  .spec-group li{
+    font-size:.86rem; color:var(--gray-1); line-height:1.55;
+    padding-left:16px; position:relative;
+  }
+  .spec-group li::before{
+    content:''; position:absolute; left:0; top:8px;
+    width:5px; height:5px; border-radius:50%; background:var(--gray-2);
   }
 
-  .divider {
-    width: 60px;
-    height: 3px;
-    background: #fecb47;
-    margin: 0 auto 28px;
-    border-radius: 2px;
+  /* ---------- financing ---------- */
+  .financing{background:var(--charcoal); color:var(--white);}
+  .financing .section-head p{color:rgba(255,255,255,.65);}
+  .fin-badges{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:26px;
+  }
+  .fin-badge{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:10px;
+    padding:16px 12px;
+    text-align:center;
+    font-size:.78rem; font-weight:600; letter-spacing:.02em;
   }
 
-  h1 {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: clamp(24px, 5vw, 34px);
-    color: #3a3836;
-    letter-spacing: 0.3px;
+  /* ---------- location ---------- */
+  .location{background:var(--blush);}
+  .loc-card{
+    background:var(--white); border-radius:12px; padding:24px 22px;
+    box-shadow:var(--shadow);
   }
+  .loc-row{display:flex; gap:14px; padding:12px 0; border-bottom:1px solid var(--gray-3);}
+  .loc-row:last-child{border-bottom:none;}
+  .loc-label{font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--gray-2); width:90px; flex-shrink:0; padding-top:2px;}
+  .loc-value{font-size:.9rem; color:var(--charcoal); font-weight:500;}
 
-  p {
-    margin-top: 12px;
-    font-size: 14px;
-    color: #797673;
-    letter-spacing: 0.5px;
+  /* ---------- final cta ---------- */
+  .final-cta{
+    position:relative;
+    padding:80px 0 90px;
+    text-align:center;
+    color:var(--white);
+    overflow:hidden;
+  }
+  .final-cta-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .final-cta-scrim{position:absolute; inset:0; background:linear-gradient(180deg, rgba(34,31,28,.7), rgba(34,31,28,.92));}
+  .final-cta-content{position:relative; z-index:2;}
+  .final-cta .eyebrow{color:var(--gold);}
+  .final-cta h2{
+    font-size:clamp(2rem,8vw,2.8rem);
+    margin:14px 0 16px;
+    line-height:1.15;
+  }
+  .final-cta p{color:rgba(255,255,255,.75); max-width:42ch; margin:0 auto 30px; font-size:.95rem; line-height:1.6;}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--charcoal); color:rgba(255,255,255,.5); padding:34px 0 110px; text-align:center;}
+  footer img{height:20px; margin:0 auto 14px; filter:brightness(0) invert(1); opacity:.85;}
+  footer p{font-size:.72rem; letter-spacing:.03em;}
+
+  /* ---------- whatsapp float ---------- */
+  .wa-float{
+    position:fixed; bottom:20px; right:20px; z-index:200;
+    width:58px; height:58px; border-radius:50%;
+    background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 24px rgba(37,211,102,.5);
+    animation:pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{box-shadow:0 8px 24px rgba(37,211,102,.5);}50%{box-shadow:0 8px 30px rgba(37,211,102,.75);}}
+  .wa-float svg{width:28px; height:28px;}
+
+  /* ---------- tablet / desktop ---------- */
+  @media(min-width:700px){
+    .facts-grid{grid-template-columns:repeat(4,1fr);}
+    .gallery-grid{grid-template-columns:repeat(3,1fr);}
+    .gallery-grid .wide{grid-column:span 3; aspect-ratio:21/9;}
+    .fin-badges{grid-template-columns:repeat(3,1fr);}
+    .container{padding:0 40px;}
+  }
+  @media(min-width:960px){
+    .specs-cols{display:grid; grid-template-columns:1fr 1fr; gap:0 60px;}
+    .plans-cols{display:grid; grid-template-columns:1.3fr 1fr; gap:40px; align-items:start;}
+    .loc-cols{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:center;}
   }
 </style>
 </head>
 <body>
 
-  <div class="container">
-    <img class="logo" src="images/logo-un-proyecto-de-castdim.png" alt="Un Proyecto de CASTDIM">
-    <div class="divider"></div>
-    <h1>Página en Construcción</h1>
-    <p>Muy pronto estará disponible</p>
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="#top" class="nav-logo"><img src="images/logo-castdim.png" alt="CASTDIM"></a>
+  <a href="#contacto" class="nav-cta">Agendar visita</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <img src="images/hero-landa.jpg" alt="Fachada modelo Landa, Sotavento Residencial" class="hero-img">
+  <div class="hero-scrim"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Sotavento Residencial · San Luis Potosí</span>
+    <h1>Landa</h1>
+    <p class="hero-sub">203.78 m² de construcción · 3 recámaras · jardín privado</p>
+    <div class="hero-price-row">
+      <div>
+        <div class="hero-price-label">Precio desde</div>
+        <div class="hero-price">$3,250,000</div>
+      </div>
+      <a href="#contacto" class="btn-primary">Agendar visita →</a>
+    </div>
   </div>
+  <div class="scroll-cue">Descubre Landa</div>
+</header>
+
+<!-- QUICK FACTS -->
+<div class="facts">
+  <div class="container facts-grid">
+    <div class="fact-item reveal">
+      <div class="fact-num">203.78</div>
+      <div class="fact-label">m² construcción</div>
+    </div>
+    <div class="fact-item reveal">
+      <div class="fact-num">3</div>
+      <div class="fact-label">Recámaras</div>
+    </div>
+    <div class="fact-item reveal">
+      <div class="fact-num">4</div>
+      <div class="fact-label">Baños completos</div>
+    </div>
+    <div class="fact-item reveal">
+      <div class="fact-num">2</div>
+      <div class="fact-label">Cajones de estacionamiento</div>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">El modelo</span>
+      <h2>Espacios en planta abierta,<br>pensados para vivir en grande.</h2>
+      <p>Landa distribuye sus recámaras en planta baja, cada una con jardín privado, mientras que la planta alta reúne sala, comedor y cocina en un solo espacio luminoso que se abre hacia la terraza. Una casa de tres niveles de altura interior, dentro de una privada de acceso controlado en Sotavento Residencial.</p>
+    </div>
+    <p class="intro-quote reveal">"Una casa que se vive de arriba hacia abajo: la vida social en las alturas, el descanso en la planta baja."</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Recorrido</span>
+      <h2>Cada rincón, con acabados premium</h2>
+    </div>
+    <div class="gallery-grid reveal" id="galleryGrid">
+      <img class="wide" src="images/DSC00125.jpg" data-full="images/DSC00125.jpg" alt="Comedor y cocina en planta abierta">
+      <img src="images/DSC00161.jpg" data-full="images/DSC00161.jpg" alt="Comedor Landa">
+      <img src="images/DSC00148.jpg" data-full="images/DSC00148.jpg" alt="Barra y cava">
+      <img class="tall" src="images/DSC00116.jpg" data-full="images/DSC00116.jpg" alt="Vestíbulo y escalera">
+      <img src="images/IMG_7663.jpg" data-full="images/IMG_7663.jpg" alt="Habitación principal">
+      <img src="images/DSC00179.jpg" data-full="images/DSC00179.jpg" alt="Recámara secundaria">
+      <img src="images/IMG_7655.jpg" data-full="images/IMG_7655.jpg" alt="Recámara con baño integrado">
+      <img class="wide" src="images/DSC00173.jpg" data-full="images/DSC00173.jpg" alt="Terraza y azotea">
+      <img src="images/DSC00111.jpg" data-full="images/DSC00111.jpg" alt="Baño completo">
+      <img src="images/DSC00177.jpg" data-full="images/DSC00177.jpg" alt="Recámara secundaria, vista al jardín">
+      <img src="images/IMG_7657.jpg" data-full="images/IMG_7657.jpg" alt="Tercera recámara">
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">✕</button>
+  <button class="lightbox-nav prev" id="lbPrev">‹</button>
+  <img src="" alt="" id="lbImg">
+  <button class="lightbox-nav next" id="lbNext">›</button>
+  <div class="lightbox-count" id="lbCount"></div>
+</div>
+
+<!-- FLOOR PLANS -->
+<section class="plans" id="plantas">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Distribución</span>
+      <h2>Plantas arquitectónicas</h2>
+      <p>La orientación de la casa puede estar espejeada según el lote asignado.</p>
+    </div>
+
+    <div class="plans-cols">
+      <div class="reveal">
+        <div class="plan-tabs">
+          <div class="plan-tab active" data-plan="baja">Planta baja</div>
+          <div class="plan-tab" data-plan="alta">Planta alta</div>
+        </div>
+
+        <div class="plan-panel active" id="panel-baja">
+          <div class="plan-card"><img src="images/planta-baja.png" alt="Planta baja modelo Landa"></div>
+        </div>
+        <div class="plan-panel" id="panel-alta">
+          <div class="plan-card"><img src="images/planta-alta.png" alt="Planta alta modelo Landa"></div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="plan-list" id="plan-list-baja">
+          <div class="plan-list-item"><span class="dot"></span>Vestíbulo de acceso</div>
+          <div class="plan-list-item"><span class="dot"></span>Habitación principal con vestidor, baño completo y jardín privado</div>
+          <div class="plan-list-item"><span class="dot"></span>2 habitaciones con baño completo y jardín privado</div>
+          <div class="plan-list-item"><span class="dot"></span>Jardín frontal</div>
+        </div>
+        <div class="plan-list" id="plan-list-alta" style="display:none;">
+          <div class="plan-list-item"><span class="dot"></span>Sala, comedor y cocina en planta abierta</div>
+          <div class="plan-list-item"><span class="dot"></span>Estancia</div>
+          <div class="plan-list-item"><span class="dot"></span>Baño completo</div>
+          <div class="plan-list-item"><span class="dot"></span>Terraza</div>
+          <div class="plan-list-item"><span class="dot"></span>Cuarto de lavado</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACABADOS -->
+<section class="specs">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Detalles que se notan</span>
+      <h2>Equipamiento y acabados</h2>
+    </div>
+
+    <div class="specs-cols">
+      <div>
+        <div class="spec-group reveal">
+          <h3>Cocina</h3>
+          <ul>
+            <li>Muebles de melamina nacional y cubierta de granito</li>
+            <li>Estufa de empotre de 80 cm, 6 quemadores</li>
+            <li>Extractor y tarja doble de acero inoxidable 77×42 cm</li>
+          </ul>
+        </div>
+        <div class="spec-group reveal">
+          <h3>Baños</h3>
+          <ul>
+            <li>W.C. cerámico one piece color blanco</li>
+            <li>Lavabo sobreponer, monomando alto y cubierta flotada de mármol</li>
+            <li>Toallero corto, portarrollos y gancho incluidos</li>
+          </ul>
+        </div>
+        <div class="spec-group reveal">
+          <h3>Pisos y muros</h3>
+          <ul>
+            <li>Loseta cerámica de formato 59.5×89.5 cm en áreas comunes</li>
+            <li>Loseta 20×60 cm en recámaras</li>
+            <li>Muros de baño de piso a techo en loseta 30×60 cm</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="spec-group reveal">
+          <h3>Cancelería e iluminación</h3>
+          <ul>
+            <li>Ventanas con marco de aluminio color negro, cristal de 6 mm</li>
+            <li>Mosquiteros en ventanas</li>
+            <li>Luminaria empotrada tipo spot, luz blanca neutra</li>
+          </ul>
+        </div>
+        <div class="spec-group reveal">
+          <h3>Instalaciones</h3>
+          <ul>
+            <li>Sistema hidráulico presurizado</li>
+            <li>Gas natural y canalización para telecomunicaciones</li>
+            <li>Canalización sin cableado para aire acondicionado</li>
+          </ul>
+        </div>
+        <div class="spec-group reveal">
+          <h3>Privada</h3>
+          <ul>
+            <li>48 casas, acceso controlado mediante caseta</li>
+            <li>Áreas comunes de esparcimiento y recreación</li>
+            <li>2 cajones de estacionamiento abierto</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCING -->
+<section class="financing">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Opciones a tu medida</span>
+      <h2>Formas de financiamiento</h2>
+      <p>Landa es compatible con los principales esquemas de crédito hipotecario en México.</p>
+    </div>
+    <div class="fin-badges reveal">
+      <div class="fin-badge">Infonavit</div>
+      <div class="fin-badge">Cofinavit</div>
+      <div class="fin-badge">Fovissste</div>
+      <div class="fin-badge">Unamos</div>
+      <div class="fin-badge">Crédito BBVA</div>
+      <div class="fin-badge">Crédito bancario</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location">
+  <div class="container">
+    <div class="loc-cols">
+      <div class="section-head reveal">
+        <span class="eyebrow">Ubicación</span>
+        <h2>Sotavento Residencial</h2>
+        <p>Una privada consolidada al sur poniente de la ciudad, con vialidades de fácil acceso y servicios a la mano.</p>
+      </div>
+      <div class="loc-card reveal">
+        <div class="loc-row">
+          <div class="loc-label">Calle</div>
+          <div class="loc-value">Circuito Bahía de Petalco</div>
+        </div>
+        <div class="loc-row">
+          <div class="loc-label">Colonia</div>
+          <div class="loc-value">Cuartel de Cruces</div>
+        </div>
+        <div class="loc-row">
+          <div class="loc-label">Municipio</div>
+          <div class="loc-value">San Luis Potosí, S.L.P.</div>
+        </div>
+        <div class="loc-row">
+          <div class="loc-label">C.P.</div>
+          <div class="loc-value">78397</div>
+        </div>
+        <div class="loc-row">
+          <div class="loc-label">Uso de suelo</div>
+          <div class="loc-value">Unifamiliar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="contacto">
+  <img src="images/DSC00173.jpg" class="final-cta-img" alt="Terraza Sotavento Residencial">
+  <div class="final-cta-scrim"></div>
+  <div class="final-cta-content container">
+    <span class="eyebrow">Landa · Sotavento Residencial</span>
+    <h2>¿Listo para conocer<br>LANDA en persona?</h2>
+    <p>Agenda tu visita guiada y recorre el modelo completo, sus acabados y las áreas comunes de la privada.</p>
+    <a href="https://wa.me/524444116075?text=Hola%2C%20me%20interesa%20conocer%20el%20modelo%20Landa%20en%20Sotavento%20Residencial.%20%C2%BFPodr%C3%ADan%20agendarme%20una%20visita%3F" class="btn-primary" target="_blank" rel="noopener">
+      Agendar visita por WhatsApp →
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <img src="images/logo-castdim.png" alt="CASTDIM">
+    <p>Sueños Hechos Propiedad · Sotavento Residencial, San Luis Potosí</p>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a class="wa-float" href="https://wa.me/524444116075?text=Hola%2C%20me%20interesa%20conocer%20el%20modelo%20Landa%20en%20Sotavento%20Residencial." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="white"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.362.694 4.56 1.888 6.406L4 29l7.79-1.847A11.94 11.94 0 0 0 16.001 27C22.63 27 28 21.627 28 15S22.63 3 16.001 3zm6.9 16.98c-.29.816-1.44 1.5-2.36 1.7-.63.13-1.45.24-4.21-.9-3.53-1.46-5.8-5.02-5.98-5.25-.17-.24-1.43-1.9-1.43-3.63 0-1.73.9-2.58 1.23-2.94.29-.31.65-.39.86-.39.22 0 .43.01.62.01.2 0 .47-.08.73.55.29.7.98 2.4 1.06 2.57.09.18.14.38.03.61-.11.24-.16.38-.32.58-.16.2-.34.44-.48.6-.16.16-.33.34-.14.67.19.33.85 1.4 1.83 2.27 1.26 1.12 2.32 1.47 2.65 1.63.33.16.53.14.72-.08.2-.22.83-.97 1.05-1.3.22-.33.44-.28.73-.17.29.11 1.87.88 2.19 1.04.32.16.53.24.61.37.08.14.08.78-.21 1.6z"/></svg>
+</a>
+
+<script>
+  // navbar scroll state
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive:true});
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  revealEls.forEach(el => io.observe(el));
+
+  // floor plan tabs
+  const tabs = document.querySelectorAll('.plan-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const plan = tab.dataset.plan;
+      document.querySelectorAll('.plan-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + plan).classList.add('active');
+      document.getElementById('plan-list-baja').style.display = plan === 'baja' ? 'grid' : 'none';
+      document.getElementById('plan-list-alta').style.display = plan === 'alta' ? 'grid' : 'none';
+    });
+  });
+
+  // lightbox
+  const imgs = Array.from(document.querySelectorAll('#galleryGrid img'));
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  const lbCount = document.getElementById('lbCount');
+  let idx = 0;
+  function openLb(i){
+    idx = i;
+    lbImg.src = imgs[idx].dataset.full;
+    lbImg.alt = imgs[idx].alt;
+    lbCount.textContent = (idx+1) + ' / ' + imgs.length;
+    lb.classList.add('open');
+  }
+  imgs.forEach((img,i) => img.addEventListener('click', () => openLb(i)));
+  document.getElementById('lbClose').addEventListener('click', () => lb.classList.remove('open'));
+  document.getElementById('lbPrev').addEventListener('click', () => openLb((idx-1+imgs.length)%imgs.length));
+  document.getElementById('lbNext').addEventListener('click', () => openLb((idx+1)%imgs.length));
+  lb.addEventListener('click', (e) => { if(e.target === lb) lb.classList.remove('open'); });
+</script>
 
 </body>
 </html>
